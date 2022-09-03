@@ -66,10 +66,12 @@ const game = () => {
   }
   if (playerScore > computerScore) {
     console.log(`You won the game!, Score: ${playerScore}-${computerScore}`);
-  } else {
+  } else if (computerScore > playerScore) {
     console.log(
       `Computer won the game!, Score: ${computerScore}-${playerScore}`
     );
+  } else {
+    console.log(`It's a tie!, Score: ${playerScore}-${computerScore}`);
   }
 };
 
