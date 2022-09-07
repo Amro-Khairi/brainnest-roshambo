@@ -1,8 +1,15 @@
+img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30vh;
+  margin: 100px;
 }
 
 .result,
@@ -11,7 +18,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 30vh;
+  margin: 100px;
 }
 
 .invis {

@@ -80,10 +80,12 @@ const handlePlaySection = (e) => {
     : null;
 
   if (computerScore === 5 || playerScore === 5) {
-    summary.classList.remove("invis");
-    resultSection.classList.add("invis");
     playSection.classList.add("invis");
     gameTypeSection.classList.add("invis");
+    setTimeout(() => {
+      summary.classList.remove("invis");
+      resultSection.classList.add("invis");
+    }, 1000);
   }
 
   if (computerScore === 5) {
