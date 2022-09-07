@@ -8,10 +8,24 @@
     <title>Main JS Project</title>
   </head>
   <body>
-    <div class="container">
-      <button id="one-round" class="imported">Play one round</button>
-      <button id="game" class="imported">Play a game</button>
+    <div class="result invis">
+      <p class="result-text"></p>
+      <h1 class="current-score"></h1>
     </div>
+    <div class="summary container invis">
+      <h1 class="winner"></h1>
+      <h2 class="final-score"></h2>
+      <button id="play-again" class="imported">Play Again</button>
+    </div>
+    <div class="container game-type">
+      <button id="play" class="imported">Play</button>
+    </div>
+    <div class="container plays invis">
+      <button id="rock" class="imported">Rock</button>
+      <button id="paper" class="imported">Paper</button>
+      <button id="scissors" class="imported">Scissors</button>
+    </div>
+
     <script src="./scripts.js"></script>
   </body>
 </html>

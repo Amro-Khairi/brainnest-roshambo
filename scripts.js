@@ -5,8 +5,16 @@ let playerScore = 0;
 let computerScore = 0;
 
 //Dom Elements
-const roundBtn = document.getElementById("one-round");
-const gameBtn = document.getElementById("game");
+const playBtn = document.getElementById("play");
+const gameTypeSection = document.querySelector(".game-type");
+const playSection = document.querySelector(".plays");
+const resultSection = document.querySelector(".result");
+const resultText = document.querySelector(".result-text");
+const currentScore = document.querySelector(".current-score");
+const summary = document.querySelector(".summary");
+const winner = document.querySelector(".winner");
+const finalScore = document.querySelector(".final-score");
+const playAgainBtn = document.querySelector("#play-again");
 
 //Functions
 const computerPlay = () => {
@@ -49,52 +57,53 @@ const playRound = (playerSelection, computerSelection) => {
         playerScore++;
         return "You Win! Scissors beat Paper";
     }
-  } else {
-    alert("Please select one of Paper, Rock, Scissors");
-    return "You didn't choose one of the options!";
-  }
-};
-
-const game = () => {
-  for (let i = 0; i < 5; i++) {
-    playerSelection = prompt("Enter your play, please!").toLowerCase();
-    computerSelection = computerPlay();
-    console.log(
-      `Computer chose: ${computerSelection}...`,
-      playRound(playerSelection, computerSelection)
-    );
-  }
-  if (playerScore > computerScore) {
-    console.log(`You won the game!, Score: ${playerScore}-${computerScore}`);
-  } else if (computerScore > playerScore) {
-    console.log(
-      `Computer won the game!, Score: ${computerScore}-${playerScore}`
-    );
-  } else {
-    console.log(`It's a tie!, Score: ${playerScore}-${computerScore}`);
   }
 };
 
 //Handlers
-const handleRoundBtn = () => {
-  playerSelection = prompt("Enter your play, please!").toLowerCase();
-  computerSelection = computerPlay();
-  console.log(
-    `Computer chose: ${computerSelection}...`,
-    playRound(playerSelection, computerSelection)
-  );
-  console.log(
-    `Your Score: ${playerScore}`,
-    `Computer's Score: ${computerScore}`
-  );
+const handleplayBtn = () => {
+  gameTypeSection.classList.add("invis");
+  playSection.classList.remove("invis");
 };
 
-const handleGameBtn = () => {
+const handlePlaySection = (e) => {
+  playerSelection = e.target.id ? e.target.id : null;
+  computerSelection = playerSelection ? computerPlay() : null;
+
+  computerSelection
+    ? (resultText.textContent = `Computer chose: ${computerSelection}...${playRound(
+        playerSelection,
+        computerSelection
+      )}`) &&
+      (currentScore.textContent = `Your Score: ${playerScore}, Computer's Score: ${computerScore}`) &&
+      resultSection.classList.remove("invis")
+    : null;
+
+  if (computerScore === 5 || playerScore === 5) {
+    summary.classList.remove("invis");
+    resultSection.classList.add("invis");
+    playSection.classList.add("invis");
+    gameTypeSection.classList.add("invis");
+  }
+
+  if (computerScore === 5) {
+    winner.textContent = "Computer Won!";
+    finalScore.textContent = `${computerScore} - ${playerScore}`;
+  }
+  if (playerScore === 5) {
+    winner.textContent = "You Won!";
+    finalScore.textContent = `${playerScore} - ${computerScore}`;
+  }
+};
+
+const handlePlayAgain = () => {
   computerScore = 0;
   playerScore = 0;
-  game();
+  gameTypeSection.classList.remove("invis");
+  summary.classList.add("invis");
 };
 
 //Events
-roundBtn.addEventListener("click", handleRoundBtn);
-gameBtn.addEventListener("click", handleGameBtn);
+playBtn.addEventListener("click", handleplayBtn);
+playSection.addEventListener("click", handlePlaySection);
+playAgainBtn.addEventListener("click", handlePlayAgain);
